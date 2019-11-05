@@ -21,7 +21,29 @@ n = a `div` (length xs)
 -- Custom last by my own hand
 newLast xs = head (drop ((length xs) - 1) xs)
 
--- Custom init impl, exercise on page 21
+-- Custom init impl, exercises 2.7
 customInit xs = reverse (drop 1 (reverse xs))
 
 customInit2 xs = reverse (tail (reverse xs))
+
+-- Exercises 3.11
+-- ['a','b','c'] -- [Char]
+-- ('a','b','c') -- (Char, Char, Char)
+-- [(False, '0'),(True, '1')] -- [(Bool, Char)]
+-- ([False, True],['0','1']) -- ([Bool],[Char])
+-- [tail, init, reverse] -- [[a]->[a]]
+
+bools :: [Bool]
+bools = [True,False,True]
+
+nums :: [[Int]]
+nums = [[1,2,3],[6,7,8]]
+
+add :: Int -> Int -> Int -> Int
+add a b c = a + b + c
+
+copy :: a -> (a,a)
+copy a = (a,a)
+
+apply :: (a -> b) -> a -> b
+apply x y = x y
