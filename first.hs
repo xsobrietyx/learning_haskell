@@ -25,3 +25,9 @@ newLast xs = head (drop ((length xs) - 1) xs)
 customInit xs = reverse (drop 1 (reverse xs))
 
 customInit2 xs = reverse (tail (reverse xs))
+
+-- Functions
+
+-- same as newAdd a b = a + b , which type is newAdd :: Int -> Int -> Int
+newAdd :: Int -> (Int -> Int)
+newAdd a b = a + b
