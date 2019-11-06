@@ -50,7 +50,7 @@ apply x y = x y
 
 -- next exercise
 
-second :: [Int] -> Int
+second :: [a] -> a
 second xs = head (tail xs)
 
 swap :: (a,b) -> (b,a)
