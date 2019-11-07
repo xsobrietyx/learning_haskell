@@ -28,9 +28,11 @@ thirdEl (_:_:x:_) = x
 
 {--Exercises 4.8, page 45--}
 
+-- Exericse 1
 halve :: [a] -> ([a],[a]) -- splits even length list into two halves
 halve xs = splitAt ((length xs) `div` 2) xs -- div a b == a `div` b
 
+-- Exericse 2
 third :: [a] -> a
 -- pattern matching
 -- third (_:_:x:xs) = x
@@ -40,6 +42,7 @@ third :: [a] -> a
 third xs = ((!!) xs) 2
 
 {--
+    Exericse 3
     Create safetail function that behaves exactly the same as tail, but returns an empty list in case of empty list.
     You should use:
     - conditions
