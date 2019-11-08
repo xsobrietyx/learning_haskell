@@ -2,7 +2,7 @@
 
 condFoo :: Bool
 condFoo = if x > 5 then True else False
-		  where x = 10
+            where x = 10
 
 {--Guarded equations--}
 
@@ -102,3 +102,25 @@ b || c | b == c    = b
 --}
 
 a && b = if a == True then b else False
+
+{--
+    Exercise 7:
+    Formalize in terms of lambda expressions.
+    mult :: Int -> Int -> Int -> Int
+    mult x y z = x*y*z
+-}
+
+mult :: Int -> Int -> Int -> Int
+-- mult x y z = x*y*z
+mult = \x -> (\y -> (\z -> x*y*z))
+
+{--
+    Exercise 8:
+--}
+
+luhnDouble :: Int -> Int
+luhnDouble x = if (x*2)>9 then (x*2)-9 else x*2
+
+luhn :: Int -> Int -> Int -> Int -> Bool
+luhn a b c d = (((luhnDouble b)+(luhnDouble c)+(luhnDouble d)) `mod` 10) == 0
+
