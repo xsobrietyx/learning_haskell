@@ -55,3 +55,50 @@ safetail :: [a] -> [a]
 --             | otherwise = tail xs
 safetail [] = []
 safetail (_:xs) = xs
+
+{-- Exercise 4
+(||) :: Bool -> Bool -> Bool
+False || False = False
+True  || False = True
+False || True  = True
+True  || True  = True
+
+False || False = False
+_     || _     = True
+
+False || b = b
+True  || _ = True
+
+b || c | b == c    = b
+       | Otherwise = True
+--}
+
+{--
+    Exercise 5:
+    (&&) :: Bool -> Bool -> Bool
+    True && True = True
+    _    && _    = False
+--}
+
+(&&) :: Bool -> Bool -> Bool
+
+-- O.Chmut
+-- a && b = if a == True then
+--            if b == True then True
+--                else False
+--            else False
+
+-- Me
+-- a && b = if a == b then
+--            if a == False then False
+--                else True
+--            else False
+
+{--
+    Exercise 6:
+    (&&) :: Bool -> Bool -> Bool
+    True && b = b
+    False && _ = False
+--}
+
+a && b = if a == True then b else False
