@@ -43,3 +43,10 @@ replicateMy x y = [y | _ <- [1..x]]
 
 pyths :: Int -> [(Int,Int,Int)]
 pyths x = [(a,b,c) | a <- [1..x], b <- [1..x], c <- [1..x], (a*a + b*b) == c*c]
+
+-- #6
+factors :: Int -> [Int]
+factors x = [a | a <- [1..x], b <- [1..x], a * b == x]
+
+perfects :: Int -> [Int]
+perfects x = [y | y <- [1..x], y == sum (tail (reverse (factors y)))]
