@@ -71,3 +71,27 @@ twoAsOne = concat [[(x,y) | y <- [3,4]] | x <- [1,2]]
     The next iteration supplies x = 2 to the expression, and we got the next array as a result [(2,3),(2,4)]
     After concat function is called (flattering) we've got the result: [(1,3),(1,4),(2,3),(2,4)]
 --}
+
+{--
+	#8 redefine function positions using function find.
+	Positions:
+	positions :: Eq a => a -> [a] -> [Int]
+	positions x xs = [i | (a,i) <- zip xs [0..], x = a]
+	Find:
+	find :: Eq a => a -> [(a,b)] -> [b]
+	find k t = [v | (a,v) <- t, k == a]
+--}
+
+pos2 :: Eq a => a -> [a] -> [Int]
+pos2 x xs = find x [(a,b) | (a,b) <- zip xs [0..]]
+
+-- #9 Scalar product
+
+scalarproduct :: [Int] -> [Int] -> Int
+scalarproduct xs ys = sum [a*b | (a,b) <- zip xs ys]
+
+-- #10 Modify Caesar Sipher program to handle upper-case letters
+-- TBD
+
+
+
