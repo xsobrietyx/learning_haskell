@@ -90,8 +90,3 @@ pos2 x xs = find x [(a,b) | (a,b) <- zip xs [0..]]
 scalarproduct :: [Int] -> [Int] -> Int
 scalarproduct xs ys = sum [a*b | (a,b) <- zip xs ys]
 
--- #10 Modify Caesar Sipher program to handle upper-case letters
--- TBD
-
-
-
