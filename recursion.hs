@@ -101,7 +101,25 @@ ureplicate a b = b : ureplicate (a-1) b
 
 -- Decide if an element is an element of the list
 celem :: Eq a => a -> [a] -> Bool
-celem _ [] = False
+celem _ []     = False
 celem a (x:xs) = if a == x then True else celem a xs
 
+-- Exercise #7
+-- Define a function for merging two sorted lists into one
+cmerge :: Ord a => [a] -> [a] -> [a] -- Attention!!! Fighted with wrong type Eq instead of Ord
+-- [2,5,6] [1,3,4] = [1,2,3,4,5,6]
+cmerge xs []         = xs
+cmerge [] ys         = ys
+cmerge (x:xs) (y:ys) = if x <= y then x : cmerge xs (y:ys) else y : cmerge (x:xs) ys
 
+-- Exercise #8
+-- Halve copied from the functions.hs
+halve :: [a] -> ([a],[a])
+halve xs = splitAt ((length xs) `div` 2) xs
+
+-- Comparison with Java's merge sort implementation (check out the length): https://www.geeksforgeeks.org/merge-sort/
+msort :: Ord a => [a] -> [a]
+msort []  = []
+msort [a] = [a]
+msort xs  = cmerge (msort (fst h)) (msort (snd h))
+            where h = halve xs
