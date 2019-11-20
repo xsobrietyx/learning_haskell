@@ -1,7 +1,7 @@
 {--
     Exercises 6.8, page 71, Recursive function calls
 --}
-import Prelude hiding ((^))
+import Prelude hiding ((^),(!!))
 -- Exercise #1: Edit factorial function by adding the guard prohibiting
 -- to use a negative numbers as an arguments
 
@@ -35,13 +35,13 @@ euclid :: Int -> Int -> Int
 -- example: euclid 6 27 -> 3
 euclid _ 0 = 1
 euclid 0 _ = 1
-euclid a b | a > b = euclid (a - b) b
-           | a < b = euclid a (b - a)
+euclid a b | a > b  = euclid (a - b) b
+           | a < b  = euclid a (b - a)
            | a == b = a
            
 -- Exercise #5: c prefix means custom
 clength :: [a] -> Int
-clength [] = 0
+clength []     = 0
 clength (x:xs) = 1 + length xs
 {--
     [1,2,3] -> 1 + length [2,3,[]]
@@ -50,8 +50,8 @@ clength (x:xs) = 1 + length xs
 --}
 
 cdrop :: Int -> [a] -> [a]
-cdrop 0 xs = xs
-cdrop _ [] = []
+cdrop 0 xs     = xs
+cdrop _ []     = []
 cdrop a (x:xs) = cdrop (a-1) xs
 {--
     2 [1,2,3] -> cdrop (2-1) [2,3,[]]
@@ -60,8 +60,8 @@ cdrop a (x:xs) = cdrop (a-1) xs
 --}
 
 cinit :: [a] -> [a]
-cinit [] = []
-cinit [x] = []
+cinit []     = []
+cinit [x]    = []
 cinit (x:xs) = x : cinit xs
 {--
     [1,2,3] -> 1 : cinit [2,3,[]]
@@ -69,3 +69,39 @@ cinit (x:xs) = x : cinit xs
             -> 1 : 2 : []
             -> [1,2]
 --}
+
+-- Exercise #6
+-- And for list of boolean values
+uand :: [Bool] -> Bool
+uand [] = True
+uand (False:_) = False
+uand (x:xs) = x && uand xs
+{--
+    [True, False,True] -> False
+    [True,True] -> True
+--}
+
+-- Concats a list of lists in a single list of the same type
+uconcat :: [[a]] -> [a] -- [[1,2,3],[4,5,6]] -> [1,2,3,4,5,6]
+uconcat (x:[]) = x
+uconcat (x:xs) = x ++ uconcat xs -- [1,2,3] ++ [4,5,6] ++ []
+-- Lists pattern matching explanation
+-- [1,2,3] -> 1 : 2 : 3 : []
+-- (x:xs) -> x  -> 1
+--        -> xs -> [2,3]
+
+-- Replicate the element nth times
+ureplicate :: Int -> a -> [a]
+ureplicate 0 _ = []
+ureplicate a b = b : ureplicate (a-1) b
+
+-- Select the nth element of the list
+(!!) :: [a] -> Int -> a
+(!!) (x:xs) b = if b == 1 then x else (!!) xs (b-1)
+
+-- Decide if an element is an element of the list
+celem :: Eq a => a -> [a] -> Bool
+celem _ [] = False
+celem a (x:xs) = if a == x then True else celem a xs
+
+
