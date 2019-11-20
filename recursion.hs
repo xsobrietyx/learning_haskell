@@ -123,3 +123,22 @@ msort []  = []
 msort [a] = [a]
 msort xs  = cmerge (msort (fst h)) (msort (snd h))
             where h = halve xs
+            
+{--
+    Exercise #9:
+        - sum of the list of integers
+        - take n elements from the list
+        - select the last element from the non-empty list
+--}
+csum :: Integral a => [a] -> a
+csum []     = 0
+csum (x:xs) = x + csum xs
+
+ctake :: Int -> [a] -> [a]
+ctake 0 xs     = []
+ctake n (x:xs) = x : ctake (n-1) xs
+
+clast :: [a] -> a
+clast (x:[]) = x
+clast (x:xs) = clast xs 
+
