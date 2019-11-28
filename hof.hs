@@ -59,5 +59,5 @@ filter p = foldr (\x xs -> if p x then x:xs else xs) []
 --}
 dec2int :: [Int] -> Int
 dec2int = foldl (\x xs -> x * 10 + xs) 0
--- (2 * 10 + 3) * 10 + 4) * 10 + 5)
+-- (((2 * 10 + 3) * 10 + 4) * 10 + 5)
 
