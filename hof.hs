@@ -1,5 +1,5 @@
 -- Exercises 7.9, page 89
-import Prelude hiding (all, any, takeWhile, dropWhile, map, filter)
+import Prelude hiding (all, any, takeWhile, dropWhile, map, filter, curry, uncurry)
 
 -- Exercise 1. Rewrite [f x | x <- xs, p x] with map and filter
 
@@ -60,4 +60,13 @@ filter p = foldr (\x xs -> if p x then x:xs else xs) []
 dec2int :: [Int] -> Int
 dec2int = foldl (\x xs -> x * 10 + xs) 0
 -- (((2 * 10 + 3) * 10 + 4) * 10 + 5)
+
+-- Exercise 5. Define curry and uncurry functions.
+curry :: ((a,a) -> b) -> (a -> a -> b)
+
+curry f = \x -> \y -> f (x,y)
+
+uncurry :: (a -> a -> b) -> ((a,a) -> b)
+
+uncurry f = \(x,y) -> f x y
 
