@@ -70,3 +70,30 @@ uncurry :: (a -> a -> b) -> ((a,a) -> b)
 
 uncurry f = \(x,y) -> f x y
 
+{--
+    Exercise 6.
+    Redefine functions chop8, map f and iterate f using the unfold.
+    unfold p h t x | p x       =  []
+                   | otherwise = h x : unfold p h t (t x)
+    Example:
+    int2bin = unfold (==0) ('mod' 2) ('div' 2)
+--}
+
+type Bit = Int
+
+unfold p h t x | p x       =  []
+               | otherwise = h x : unfold p h t (t x)
+
+-- Just to take an example of the initial implementation in the front of my eyes
+chop8 :: [Bit] -> [[Bit]]
+chop8 [] = []
+chop8 bits = take 8 bits : chop8 (drop 8 bits)
+
+chop8unfold :: [Bit] -> [[Bit]]
+chop8unfold = unfold (== []) (take 8) (drop 8)
+
+mapViaUnfold :: (a -> b) -> [a] -> [b]
+mapViaUnfold f = unfold (\x -> length x == 0) (\x -> f (head x)) tail
+
+iterateViaUnfold :: (a -> a) -> a -> [a]
+iterateViaUnfold f = unfold (\_ -> False) id f
