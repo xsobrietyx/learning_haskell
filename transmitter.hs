@@ -46,3 +46,8 @@ channel = tail
 make8extended :: [Bit] -> [Bit]
 make8extended xs = if rule then xs ++ [0] else xs ++ [1]
                    where rule = (length xs `mod` 2) == 0
+
+-- Exercise 9. Write function altMap
+altMap :: (a -> b) -> (a -> b) -> [a] -> [b]
+altMap _ _ [] = []
+altMap f1 f2 (x:xs) = f1 x : altMap f2 f1 xs
