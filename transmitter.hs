@@ -37,10 +37,12 @@ transmit :: String -> String
 transmit = decode . channel . encode
 
 channel :: [Bit] -> [Bit]
-channel = id
+-- Exercise 8. Commented out a line and added a tail call that simulates that the first bit has been lost
+-- channel = id
+channel = tail
 
 -- Exercise 7, page 90
 -- function that adds additional ninth bit depending on the condition
 make8extended :: [Bit] -> [Bit]
-make8extended xs = if rule then xs ++ [1] else xs ++ [0]
-                   where rule = (length (filter (== 1) xs) `mod` 2) /= 0
+make8extended xs = if rule then xs ++ [0] else xs ++ [1]
+                   where rule = (length xs `mod` 2) == 0
