@@ -51,3 +51,11 @@ make8extended xs = if rule then xs ++ [0] else xs ++ [1]
 altMap :: (a -> b) -> (a -> b) -> [a] -> [b]
 altMap _ _ [] = []
 altMap f1 f2 (x:xs) = f1 x : altMap f2 f1 xs
+
+-- Exercise 10. Redesign Luhn algorithm for card numbers validation that was previously mentioned in Chapter 4.
+luhnDouble :: Int -> Int
+luhnDouble x | (x * 2) > 9 = (x * 2) - 9
+             | otherwise = x * 2
+
+luhn :: [Int] -> Bool
+luhn xs = ((sum (altMap id luhnDouble (reverse xs))) `mod` 10) == 0
