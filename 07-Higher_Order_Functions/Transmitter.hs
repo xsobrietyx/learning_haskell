@@ -58,4 +58,4 @@ luhnDouble x | (x * 2) > 9 = (x * 2) - 9
              | otherwise = x * 2
 
 luhn :: [Int] -> Bool
-luhn xs = ((sum (altMap id luhnDouble (reverse xs))) `mod` 10) == 0
+luhn xs = ((sum (altMap luhnDouble id xs)) `mod` 10) == 0
