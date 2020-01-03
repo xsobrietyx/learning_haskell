@@ -134,11 +134,13 @@ csum :: Integral a => [a] -> a
 csum []     = 0
 csum (x:xs) = x + csum xs
 
-ctake :: Int -> [a] -> [a]
-ctake 0 xs     = []
-ctake n (x:xs) = x : ctake (n-1) xs
+take' :: Int -> [a] -> [a]
+take' n _ | n <= 0 = []
+take' _ [] = []
+take' n (x:xs) = x : take' (n-1) xs
 
 clast :: [a] -> a
 clast (x:[]) = x
-clast (x:xs) = clast xs 
+clast [] = error "Empty list"
+clast (_:xs) = clast xs
 
